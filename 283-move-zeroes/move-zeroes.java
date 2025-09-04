@@ -1,24 +1,16 @@
 class Solution {
-    public void moveZeroes(int[] nums){
-        int m = nums.length;
-        int[] resultArray = new int[m];
-        // additional array to store the elements 
-        int frontIndex = 0;
-        // controls index from the front
-        int backIndex = nums.length-1;
-        // controls index from the back
-        for(int i=0; i<m; i++){
-            if(nums[i] != 0){
-                resultArray[frontIndex] = nums[i];
-                frontIndex++;
-            }
-            else{
-                resultArray[backIndex] = nums[i];
-                backIndex--;
+    // slow-fast two-pointers approach
+    public void moveZeroes(int[] nums) {
+        int writeIndex = 0;
+        // track position to place non-zero elements
+        for(int readIndex=0; readIndex<nums.length; readIndex++){
+            if(nums[readIndex] != 0){
+                nums[writeIndex] = nums[readIndex];
+                writeIndex++;
             }
         }
-        for(int i=0; i<m; i++){
-            nums[i] = resultArray[i];
+        for(int i = writeIndex; i<nums.length; i++){
+            nums[i] = 0;
         }
     }
 }
