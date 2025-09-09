@@ -1,32 +1,29 @@
 class Solution {
     public boolean isValid(String s) {
-        char[] checkValid = s.toCharArray();
-        Stack<Character> stack = new Stack<>();
-        for(int i=0; i<checkValid.length; i++){
-            if(checkValid[i]=='(' || checkValid[i]=='{' || checkValid[i]=='['){
-                stack.push(checkValid[i]);
-            }
-            else if(checkValid[i]==')' || checkValid[i]=='}' || checkValid[i]==']'){
-                if(stack.isEmpty()){
-                    return false;
+        int n = s.length();
+        char[] stack = new char[n];  
+        int top = -1; 
+
+        for(int i=0; i<n; i++){
+             char ch = s.charAt(i);
+
+             // if opening bracket --> push
+             if(ch=='(' || ch=='{' || ch=='['){
+                stack[++top] = ch;   
+             }
+
+             // if closing bracket --> check top
+             else{
+                if(top == -1){
+                    return false;  // no matching opening
                 }
-                else{
-                    char top = stack.peek();
-                    if(checkValid[i]==')' && top=='('){
-                        stack.pop();
-                    }
-                    else if(checkValid[i]=='}' && top=='{'){
-                        stack.pop();
-                    }
-                    else if(checkValid[i]==']' && top=='['){
-                        stack.pop();
-                    }
-                    else{
-                        return false;
-                    }
+                // access top element of stack
+                char last = stack[top--];  
+                if(ch==')' && last!='(' || ch=='}' && last!='{' || ch==']' && last!='['){
+                    return false;
                 }
             }
         }
-        return stack.isEmpty();
+        return top == -1;
     }
 }
