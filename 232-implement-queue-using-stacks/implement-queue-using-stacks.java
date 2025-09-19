@@ -1,9 +1,9 @@
 class MyQueue {
-    private Stack<Integer> stack1;
-    private Stack<Integer> stack2;
+    private Deque<Integer> stack1;
+    private Deque<Integer> stack2;
     public MyQueue() {
-        stack1 = new Stack<>();
-        stack2 = new Stack<>();
+        stack1 = new ArrayDeque<>();
+        stack2 = new ArrayDeque<>();
     }
     
     public void push(int x) {
